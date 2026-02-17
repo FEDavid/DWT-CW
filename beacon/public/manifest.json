@@ -4,14 +4,14 @@
   "description": "Emergency location sharing and safety alert application.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F0FAF5",
+  "background_color": "#050F0A",
   "theme_color": "#48BF84",
   "orientation": "portrait",
   "scope": "/",
   "lang": "en-GB",
   "icons": [
     {
-      "src": "/icons/logo_light-green.png",
+      "src": "/icons/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
