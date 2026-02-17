@@ -1,0 +1,25 @@
+:root {
+  color-scheme: light dark;
+
+  /* Base Greens */
+  --green-dark: #112D1C;
+  --green-darker: #050F0A;
+  --green-medium: #30885C;
+  --green-bright: #48BF84;
+  --green-light: #86D5AD;
+  --green-very-light: #F0FAF5;
+
+  /* Original Role Mapping (preserved) */
+  --background: light-dark(var(--green-very-light), var(--green-darker));
+  --container: light-dark(var(--green-light), var(--green-medium));
+  --text: light-dark(var(--green-dark), var(--green-very-light));
+
+  /* Button mapping (preserved) */
+  --btn-light: var(--green-medium);
+  --btn-dark: var(--green-bright);
+  --btn: light-dark(var(--btn-light), var(--btn-dark));
+  --btn-hover: light-dark(#246445, #4FD08F);
+
+  /* Alert */
+  --alert: light-dark(#D94C4C, #E85C5C);
+}

@@ -1,0 +1,99 @@
+@import './reset.css';
+@import './font_poppins.css';
+@import './colours.css';
+
+
+.app {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  background: var(--background);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.logo, .logo-container{
+  height: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(60px + 1.5rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--green-medium);
+}
+
+.container {
+  display: grid;
+  gap: 2rem;
+  max-width: 700px;
+}
+
+.card {
+  padding: 1.75rem;
+  border-radius: 14px;
+  background: var(--container);
+  color: var(--text);
+  transition: background 0.3s ease;
+}
+
+.primary-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.75rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--btn);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, 
+              background 0.2s ease, 
+              box-shadow 0.15s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2.5px);
+  background: var(--btn-hover);
+  box-shadow: 0 6.5px 14px rgba(0, 0, 0, 0.25);
+}
+
+.alert {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: var(--alert);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.toggle-btn {
+  border-radius: 100%;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--container);
+  color: var(--text);
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  aspect-ratio: 1;
+}
+
+.toggle-btn:hover {
+  opacity: 0.85;
+}
