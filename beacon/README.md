@@ -23,6 +23,7 @@
 - Geolocation API
 - Local Storage API
 - SMS API
+- Notifications API
 - Service Workers
 
 ---
