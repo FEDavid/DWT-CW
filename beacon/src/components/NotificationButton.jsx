@@ -1,8 +1,9 @@
 // Import styles
 import "../assets/css/App.css";
-
+import { useState, useEffect } from "react";
+    
 function NotificationTest() {
-    const [status, setStatus] = React.useState("");
+    const [status, setStatus] = useState("");
 
     const handleNotify = (message) => {
         // Display permission state on screen instead of console
