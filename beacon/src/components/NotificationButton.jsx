@@ -29,3 +29,5 @@ function NotificationTest() {
         </div>
     );
 }
+
+export default NotificationTest;
