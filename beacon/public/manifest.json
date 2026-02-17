@@ -4,7 +4,7 @@
   "description": "Emergency location sharing and safety alert application.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050F0A",
+  "background_color": "#112d1c",
   "theme_color": "#48BF84",
   "orientation": "portrait",
   "scope": "/",
