@@ -6,7 +6,7 @@ import logo from "./assets/images/logo_light-green.png";
 
 // Import components
 import ThemeToggle from "./components/ThemeToggle";
-import NotificationTest from "./components/NotificationButton";
+import NotificationTest from "./components/NotificationTest";
 
 // Import hooks
 
