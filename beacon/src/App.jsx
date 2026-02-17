@@ -4,16 +4,14 @@ import "./assets/css/App.css";
 // Import images
 import logo from "./assets/images/logo_light-green.png";
 
+// Import components
+import ThemeToggle from "./components/ThemeToggle";
+import NotificationTest from "./components/NotificationButton";
+
 // Import hooks
-import { useState, useEffect } from "react";
+
 
 function App() {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    document.documentElement.style.colorScheme = theme;
-  }, [theme]);
-
   return (
     <div className="app">
 
@@ -22,16 +20,7 @@ function App() {
           <img src={logo} alt="Beacon Logo" className="logo" />
           <h1 className="poppins-bold">Beacon</h1>
         </div>
-        <button
-          className="toggle-btn"
-          onClick={() =>
-            setTheme(theme === "light" ? "dark" : "light")
-          }
-        >
-          <span className="material-symbols-outlined">
-            contrast
-          </span>
-        </button>
+        <ThemeToggle />
       </header>
 
       <main className="container">
@@ -49,6 +38,8 @@ function App() {
           <div className="alert">
             Emergency signal sent.
           </div>
+          {/* Testing notifications */}
+          <NotificationTest />
         </section>
       </main>
 
