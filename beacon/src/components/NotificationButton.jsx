@@ -14,6 +14,8 @@ function NotificationTest() {
                 }
             });
         }
+        // Log the current permission state for debugging
+        console.log("Permission state:", Notification.permission);
     };
 
     return (
