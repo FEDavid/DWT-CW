@@ -1,20 +1,19 @@
 // Import styles
 import "../assets/css/App.css";
-import { useState, useEffect } from "react";
-    
+
 function NotificationTest() {
-    const [status, setStatus] = useState("");
 
     const handleNotify = (message) => {
-        // Display permission state on screen instead of console
-        setStatus("Permission: " + Notification.permission);
         if (Notification.permission === "granted") {
-            new Notification("Hello!", { body: message });
+            navigator.serviceWorker.ready.then((sw) => {
+                sw.showNotification("Beacon", { body: message });
+            });
         } else {
             Notification.requestPermission().then((permission) => {
-                setStatus("Permission: " + permission);
                 if (permission === "granted") {
-                    new Notification("Hello!", { body: message });
+                    navigator.serviceWorker.ready.then((sw) => {
+                        sw.showNotification("Beacon", { body: message });
+                    });
                 }
             });
         }
@@ -25,8 +24,6 @@ function NotificationTest() {
             <button className="primary-btn" onClick={() => handleNotify("Hello test")}>
                 Send Test Notification
             </button>
-            {/* Temporary debug display */}
-            <p>{status}</p>
         </div>
     );
 }
