@@ -1,7 +1,22 @@
 # Beacon
 
+## Completed steps
+- [x] Basic UI
+- [x] Local storage API
+- [x] Notifications API
+- [x] Service worker
+- [x] Geolocate API
+
+## Next steps
+- [ ] Contacts API
+- [ ] SMS API
+- [ ] DB CONNECTION
+- [ ] OFFLINE PROTECTION
+
 ## Contents
 - [Beacon](#beacon)
+  - [Completed steps](#completed-steps)
+  - [Next steps](#next-steps)
   - [Contents](#contents)
   - [Installation](#installation)
   - [APIs and Tools](#apis-and-tools)
