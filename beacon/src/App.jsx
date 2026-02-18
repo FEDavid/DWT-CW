@@ -7,10 +7,9 @@ import logo from "./assets/images/logo_light-green.png";
 // Import components
 import ThemeToggle from "./components/ThemeToggle";
 import NotificationTest from "./components/NotificationTest";
+import GeolocateTest from "./components/GeolocateTest";
 
 // Import hooks
-
-
 function App() {
   return (
     <div className="app">
@@ -32,15 +31,18 @@ function App() {
           </button>
         </section>
 
+        {/* Notification test */}
         <section className="card">
-          <h2>Status Panel</h2>
-          <p>Location synced. Last update 12:03.</p>
-          <div className="alert">
-            Emergency signal sent.
-          </div>
-          {/* Testing notifications */}
+          <h2>Notification test</h2>
           <NotificationTest />
         </section>
+
+        {/* Geolocate test */}
+        <section className="card">
+          <h2>Geolocation</h2>
+          <GeolocateTest />
+        </section>
+
       </main>
 
     </div>

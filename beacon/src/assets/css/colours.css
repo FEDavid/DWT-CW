@@ -22,4 +22,5 @@
 
   /* Alert */
   --alert: light-dark(#D94C4C, #E85C5C);
+  --alert-hover: light-dark(#E85C5C, #D94C4C);
 }
