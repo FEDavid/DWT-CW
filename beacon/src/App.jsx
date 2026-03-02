@@ -9,6 +9,9 @@ import ThemeToggle from "./components/ThemeToggle";
 import NotificationTest from "./components/NotificationTest";
 import GeolocateTest from "./components/GeolocateTest";
 
+// Import functions
+import { trackingReminder } from "./main"
+
 // Import hooks
 function App() {
   return (
@@ -25,9 +28,9 @@ function App() {
       <main className="container">
         <section className="card">
           <h2>Primary Action</h2>
-          <p>This is where your emergency trigger would live.</p>
-          <button className="primary-btn">
-            Trigger Beacon
+          <p>Triggers 30 minute interval timer</p>
+          <button className="primary-btn" onClick={trackingReminder}>
+            Start reminders
           </button>
         </section>
 

@@ -15,7 +15,7 @@ function GeolocateTest() {
     // Loading GPS data takes a second so adding loader
     const [isLoading, setIsLoading] = useState(false);
 
-    // Load from localStorage on mount
+    // Load from localStorage on launch
     useEffect(() => {
         const saved = localStorage.getItem("locations");
         if (saved) {
