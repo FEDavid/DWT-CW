@@ -10,7 +10,7 @@ import NotificationTest from "./components/NotificationTest";
 import GeolocateTest from "./components/GeolocateTest";
 
 // Import functions
-import { trackingReminder } from "../public/main"
+import { trackingReminder } from "./utils/reminder"
 
 // Import hooks
 function App() {
