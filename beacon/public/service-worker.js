@@ -1,14 +1,14 @@
 // service-worker.js
 self.addEventListener("install", (event) =>{
-    console.log("Service worker installing...");
-// Put your code for caching assets, etc. here
+    console.log("Service worker installing..");
 });
 
-// Handles what happens when the user taps the notification
+// Handles what happens when the user taps the notification buttn
 self.addEventListener("notificationclick", (event) => {
     event.notification.close();
     event.waitUntil(
-        clients.openWindow("/") // opens the app when notification is tapped
+        // Opens the app when notification is tapped
+        clients.openWindow("/") 
     );
 });
 

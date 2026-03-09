@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function ThemeToggle() {
+function ThemeToggle_component() {
     
     // Determine initial theme based on localStorage or system preference
     // Checks localStorage for a saved theme, then falls back to system preference
@@ -31,4 +31,4 @@ function ThemeToggle() {
     );
 }
 
-export default ThemeToggle;
+export default ThemeToggle_component;

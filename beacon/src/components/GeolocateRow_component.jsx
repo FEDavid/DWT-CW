@@ -3,7 +3,7 @@
 import "../assets/css/App.css";
 
 // GeolocateRow.jsx
-function GeolocateRow({ latitude, longitude, timestamp }) {
+function GeolocateRow_component({ latitude, longitude, timestamp }) {
 
     // Referencing
     // https://stackoverflow.com/questions/1801732/how-do-i-link-to-google-maps-with-a-particular-longitude-and-latitude
@@ -22,4 +22,4 @@ function GeolocateRow({ latitude, longitude, timestamp }) {
     );
 }
 
-export default GeolocateRow;
+export default GeolocateRow_component;

@@ -5,7 +5,7 @@ import "../assets/css/App.css";
 // Import functions
 import { sendImmediateNotification } from "../utils/notifications"
 
-function NotificationTest() {
+function Notification_component() {
     return (
         <div>
             <button className="primary-btn" onClick={() => sendImmediateNotification("Hello test")}>
@@ -15,4 +15,4 @@ function NotificationTest() {
     );
 }
 
-export default NotificationTest;
+export default Notification_component;

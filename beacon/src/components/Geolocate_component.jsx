@@ -2,52 +2,56 @@
 // Import styles
 import "../assets/css/App.css";
 
-// import components
-import GeolocateRow from "./GeolocateRow";
+// Import utilities
+import { checkBatteryWarning } from "../utils/battery";
 
-// import hooks
+// Import components
+import GeolocateRow from "./GeolocateRow_component";
+
+// Import hooks
 import { useEffect, useState } from "react";
 
-function GeolocateTest() {
-    // Store array of location records instead of single values
-    const [locations, setLocations] = useState([]);
-
+function Geolocate_component() {
     // Loading GPS data takes a second so adding loader
     const [isLoading, setIsLoading] = useState(false);
 
-    // Load from localStorage on launch
-    useEffect(() => {
+    // Setup setLocations hook and it's default value
+    const [locations, setLocations] = useState(() => {
         const saved = localStorage.getItem("locations");
-        if (saved) {
-            setLocations(JSON.parse(saved));
-        }
-    }, []); // empty dependency array = runs once on mount
+        return saved ? JSON.parse(saved) : [];
+    });
 
     // Save to localStorage whenever locations changes
     useEffect(() => {
-        if (locations.length > 0) {
-            localStorage.setItem("locations", JSON.stringify(locations));
-        }
+        localStorage.setItem("locations", JSON.stringify(locations));
     }, [locations]); // runs whenever locations array changes
 
     // Get current location and add to array
     const handleGetLocation = () => {
         if (navigator.geolocation) {
-            setIsLoading(true); // show loading state
+            // Show loading state
+            setIsLoading(true);
             navigator.geolocation.getCurrentPosition(
-                (position) => {
+                // Async due to battery promise
+                async (position) => {
                     const newLocation = {
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
                         timestamp: new Date(position.timestamp).toLocaleString('en-GB')
                     };
                     setLocations([...locations, newLocation]);
-                    setIsLoading(false); // hide loading state
+
+                    // Check battery
+                    await checkBatteryWarning();
+                    
+                    // Hide loading state
+                    setIsLoading(false);
                 },
                 (error) => {
                     console.error("Geolocation error:", error);
-                    setIsLoading(false);
                     alert("Failed to get location");
+                    // Hide loading state
+                    setIsLoading(false);
                 }
             );
         } else {
@@ -58,6 +62,8 @@ function GeolocateTest() {
     // Clear all saved locations
     const handleClearLocations = () => {
         setLocations([]);
+        // Although setLocations hook will set "locations" array in storage to empty anyway doing this
+        // It is best to remove the item all together as this is data best practice
         localStorage.removeItem("locations");
     }
 
@@ -93,4 +99,4 @@ function GeolocateTest() {
     );
 }
 
-export default GeolocateTest;
+export default Geolocate_component;

@@ -13,7 +13,9 @@ export async function trackingReminder() {
 
     // Registering new task
     await registration.periodicSync.register("location-reminder", {
-        minInterval: 30 * 60 * 1000,
+        // milliseconds * seconds * minutes * hours
+        // Runs every 12 hours
+        minInterval: 1000 * 60 * 60 * 12,
     });
     console.log("Reminder registered");
 }
