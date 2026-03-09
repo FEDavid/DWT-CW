@@ -5,9 +5,9 @@ import "./assets/css/App.css";
 import logo from "./assets/images/logo_light-green.png";
 
 // Import components
-import ThemeToggle from "./components/ThemeToggle";
-import NotificationTest from "./components/NotificationTest";
-import GeolocateTest from "./components/GeolocateTest";
+import ThemeToggle from "./components/ThemeToggle_component";
+import NotificationTest from "./components/Notification_component";
+import GeolocateTest from "./components/Geolocate_component";
 
 // Import functions
 import { trackingReminder } from "./utils/reminder"
