@@ -10,6 +10,7 @@ export async function trackingReminder() {
     // Confirming period sync exists in service worker
     if (!("periodicSync" in registration)) {
         console.log("Periodic Sync not supported");
+        sendImmediateNotification("Reminders unavailable in this browser. Please try Google Chrome!");
         return;
     }
 
