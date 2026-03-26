@@ -4,6 +4,7 @@ import "../assets/css/App.css";
 
 // Import utilities
 import { checkBatteryWarning } from "../utils/battery";
+import { sendImmediateNotification } from "../utils/notifications";
 
 // Import components
 import GeolocateRow from "./GeolocateRow_component";
@@ -46,16 +47,18 @@ function Geolocate_component() {
                     
                     // Hide loading state
                     setIsLoading(false);
+
+                    sendImmediateNotification("Location logged.")
                 },
                 (error) => {
                     console.error("Geolocation error:", error);
-                    alert("Failed to get location");
+                    sendImmediateNotification("Failed to get location");
                     // Hide loading state
                     setIsLoading(false);
                 }
             );
         } else {
-            alert("Geolocation is not supported by this browser.");
+            sendImmediateNotification("Geolocation is not supported by this browser.");
         }
     };
 
@@ -65,10 +68,14 @@ function Geolocate_component() {
         // Although setLocations hook will set "locations" array in storage to empty anyway doing this
         // It is best to remove the item all together as this is data best practice
         localStorage.removeItem("locations");
+        sendImmediateNotification("Location data cleared.")
     }
 
     return (
-        <div>
+        <section className="card">
+            <h1 className="card-title">Geolocation</h1>
+            <p className="body-text">Allows user to store current location, and also open that location on Google maps using a URL query with the latitude and longitude. Also offers option to remove all stored locations!</p>
+            <div className="seperator"></div>
             <div className="button-row">
                 <button className="primary-btn" onClick={handleGetLocation} disabled={isLoading}>
                     {isLoading && <div className="loader"></div>}
@@ -78,6 +85,7 @@ function Geolocate_component() {
                     Clear Locations
                 </button>
             </div>
+            <div className="seperator"></div>
 
             {/* Table showing all geolocation data */}
             <div className="geolocate-table">
@@ -95,7 +103,7 @@ function Geolocate_component() {
                     />
                 ))}
             </div>
-        </div>
+        </section>
     );
 }
 

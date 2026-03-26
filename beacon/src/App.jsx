@@ -1,55 +1,20 @@
 // Import styles
 import "./assets/css/App.css";
 
-// Import images
-import logo from "./assets/images/logo_light-green.png";
-
 // Import components
-import ThemeToggle from "./components/ThemeToggle_component";
-import NotificationTest from "./components/Notification_component";
-import GeolocateTest from "./components/Geolocate_component";
-
-// Import functions
-import { trackingReminder } from "./utils/reminder"
+import PermissionsNotSetup from "./components/views/Permissions_notsetup";
+import PermissionsSetup from "./components/views/Permissions_setup";
 
 // Import hooks
+import { useState } from "react";
+
 function App() {
-  return (
-    <div className="app">
+  // Utilising useState hook to manage stored permissions and perform conditional rendering based on state
+  const [isReady, setIsReady] = useState(false);
 
-      <header className="header">
-        <div className="logo-container">
-          <img src={logo} alt="Beacon Logo" className="logo" />
-          <h1 className="poppins-bold">Beacon</h1>
-        </div>
-        <ThemeToggle />
-      </header>
-
-      <main className="container">
-        <section className="card">
-          <h2>Primary Action</h2>
-          <p>Triggers 30 minute interval timer</p>
-          <button className="primary-btn" onClick={trackingReminder}>
-            Start reminders
-          </button>
-        </section>
-
-        {/* Notification test */}
-        <section className="card">
-          <h2>Notification test</h2>
-          <NotificationTest />
-        </section>
-
-        {/* Geolocate test */}
-        <section className="card">
-          <h2>Geolocation</h2>
-          <GeolocateTest />
-        </section>
-
-      </main>
-
-    </div>
-  );
+  return isReady
+    ? <PermissionsSetup />
+    : <PermissionsNotSetup onReady={() => setIsReady(true)} />;
 }
 
 export default App;

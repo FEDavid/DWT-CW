@@ -16,10 +16,23 @@ export async function setupNotifications() {
 }
 
 export async function sendImmediateNotification(message) {
-    const registration = await setupNotifications();
-    if (!registration) return;
+    if (!("serviceWorker" in navigator)) return;
+    const registration = await navigator.serviceWorker.ready;
+    if (!registration.active) return;
 
-    await registration.showNotification("Beacon", {
+    console.log("SW registration:", registration);
+    console.log("Notification permissions: " + Notification.permission);
+
+    registration.showNotification("Beacon", {
         body: message,
+        tag: "test-notification",
+        renotify: true,
     });
+
+    registration.active.postMessage({
+        type: "SHOW_NOTIFICATION",
+        message,
+    });
+
+    console.log("Notification call completed");
 }

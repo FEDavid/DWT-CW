@@ -1,5 +1,7 @@
 import { setupNotifications } from "./notifications";
+import { sendImmediateNotification } from "./notifications";
 
+// Sets up reminders
 export async function trackingReminder() {
     // Confirming permissions are setup first
     const registration = await setupNotifications();
@@ -18,4 +20,6 @@ export async function trackingReminder() {
         minInterval: 1000 * 60 * 60 * 12,
     });
     console.log("Reminder registered");
+
+    sendImmediateNotification("Reminders registered!");
 }

@@ -7,7 +7,7 @@
   --green-medium: #30885C;
   --green-bright: #48BF84;
   --green-light: #86D5AD;
-  --green-very-light: #F0FAF5;
+  --green-very-light: #cfe4d9;
 
   /* Original Role Mapping (preserved) */
   --background: light-dark(var(--green-very-light), var(--green-darker));

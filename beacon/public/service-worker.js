@@ -21,3 +21,14 @@ self.addEventListener("periodicsync", (event) => {
     })
   );
 });
+
+// Notification listener
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SHOW_NOTIFICATION") {
+    self.registration.showNotification("Beacon", {
+      body: event.data.message,
+      icon: "/icons/logo.png",
+    });
+    console.log("SW received message:", event.data);
+  }
+});
