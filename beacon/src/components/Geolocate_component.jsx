@@ -1,6 +1,10 @@
-// GeolocateTest.jsx
+// beacon\src\components\Geolocate_component.jsx
+
 // Import styles
 import "../assets/css/App.css";
+
+// External libraries
+import { useLiveQuery } from "dexie-react-hooks";
 
 // Import utilities
 import { checkBatteryWarning } from "../utils/battery";
@@ -10,24 +14,19 @@ import { sendImmediateNotification } from "../utils/notifications";
 import GeolocateRow from "./GeolocateRow_component";
 
 // Import hooks
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+// Import utils
+import { db } from "../utils/indexDB";
 
 function Geolocate_component() {
     // Loading GPS data takes a second so adding loader
     const [isLoading, setIsLoading] = useState(false);
 
-    // Setup setLocations hook and it's default value
-    const [locations, setLocations] = useState(() => {
-        const saved = localStorage.getItem("locations");
-        return saved ? JSON.parse(saved) : [];
-    });
+    // Using useLiveQuery hook to get real-time updates from Dexie database, and fallback to empty array if no data is present
+    const locations = useLiveQuery(() => db.locations.toArray()) || [];
 
-    // Save to localStorage whenever locations changes
-    useEffect(() => {
-        localStorage.setItem("locations", JSON.stringify(locations));
-    }, [locations]); // runs whenever locations array changes
-
-    // Get current location and add to array
+    // Get current location and add to db, which will trigger re-render of component due to useLiveQuery hook
     const handleGetLocation = () => {
         if (navigator.geolocation) {
             // Show loading state
@@ -35,16 +34,19 @@ function Geolocate_component() {
             navigator.geolocation.getCurrentPosition(
                 // Async due to battery promise
                 async (position) => {
+                    // Add new location to Dexie database, which will trigger re-render of component due to useLiveQuery hook
                     const newLocation = {
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
-                        timestamp: new Date(position.timestamp).toLocaleString('en-GB')
+                        timestamp: new Date(position.timestamp).toLocaleString('en-GB'),
+                        title: `Location ${new Date().toLocaleTimeString()}`,
+                        image: null
                     };
-                    setLocations([...locations, newLocation]);
+                    await db.locations.add(newLocation);
 
                     // Check battery
                     await checkBatteryWarning();
-                    
+
                     // Hide loading state
                     setIsLoading(false);
 
@@ -63,11 +65,8 @@ function Geolocate_component() {
     };
 
     // Clear all saved locations
-    const handleClearLocations = () => {
-        setLocations([]);
-        // Although setLocations hook will set "locations" array in storage to empty anyway doing this
-        // It is best to remove the item all together as this is data best practice
-        localStorage.removeItem("locations");
+    const handleClearLocations = async () => {
+        await db.locations.clear();
         sendImmediateNotification("Location data cleared.")
     }
 
@@ -88,18 +87,17 @@ function Geolocate_component() {
             <div className="seperator"></div>
 
             {/* Table showing all geolocation data */}
-            <div className="geolocate-table">
-                <p className="geolocate-header">Coordinates</p>
-                <p className="geolocate-header">Timestamp</p>
-                <p className="geolocate-header map-link-header">Map link</p>
-                <div className="seperator"></div>
+            <div className="geolocate-results">
                 {/* Map over locations array to create rows */}
-                {locations.map((location, index) => (
+                {locations.map((location) => (
                     <GeolocateRow
-                        key={index}
+                        key={location.id}
+                        id={location.id}
+                        title={location.title}
                         latitude={location.latitude}
                         longitude={location.longitude}
                         timestamp={location.timestamp}
+                        image={location.image}
                     />
                 ))}
             </div>

@@ -213,21 +213,22 @@ a:hover{
   font-weight: 700;
 }
 
-.geolocate-table {
-  display: grid;
-  grid-template-columns: 1fr repeat(2, auto);
-  column-gap: 2rem;
-  row-gap: 1rem;
-  background: var(--container);
-  padding: 1rem;
+/* Geolocate */
+.geolocate-results{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.geolocate-card {
+  background: var(--background);
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  overflow: hidden;
 }
 
-.geolocate-header{
-  text-wrap: nowrap;
-}
-
-.geolocate-cell, .geolocate-cell-last {
+.geolocate-cell{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -235,45 +236,186 @@ a:hover{
   align-items: center;
 }
 
-.geolocate-cell-first {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.geolocate-cell-last{
+.geolocate-cell-btn{
   background: var(--btn);
   color: #ffffff;
-  padding: 0.1rem 2rem;
+  text-align: center;
+  padding: 0.25rem;
   border-radius: 5rem;
 }
 
-.geolocate-cell-last:visited{
+.geolocate-cell-btn:hover{
+  background: var(--btn-hover);
+}
+
+.geolocate-text{
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+  gap: 0.25rem;
+}
+
+.geolocate-meta{
+  display: flex;
+  font-size: small;
+  border-top: 2px solid var(--green-medium);
+  padding: 0.5rem 0rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.geolocate-title{
+  font-weight: 900;
+  font-size: x-large;
+}
+
+.geolocate-cell-cood {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.geolocate-delete, .geolocate-edit{
+  padding: 0.25rem;
+  border-radius: 5rem;
+}
+
+.geolocate-btns{
+  display: grid;
+  grid-template-columns: 1fr repeat(2, auto);
+  gap: 0.5rem;
+}
+
+.geolocate-image {
+  position: relative;
+  transition: filter 0.25s ease;
+  cursor: pointer;
+}
+
+.geolocate-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* adjust darkness */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.geolocate-image::after {
+  content: "upload"; /* material icon text */
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: 'FILL' 1;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 40px;
+  color: white;
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+
+  pointer-events: none;
+}
+
+.geolocate-image:hover::after {
+  opacity: 1;
+}
+
+.geolocate-image:hover::before {
+  opacity: 1;
+}
+
+/* Camera Modal */
+.camera-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.camera-controls{
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.camera-control {
+  background: var(--btn);
+}
+
+.camera-control-danger {
+  background: var(--alert);
+}
+
+.camera-control, .camera-control-danger{
+  padding: 0.75rem 1.75rem;
+  position: relative;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
   color: #ffffff;
+  transition: transform 0.15s ease, 
+              background 0.2s ease, 
+              box-shadow 0.15s ease;
+}
+
+.camera-control:hover {
+  background: var(--btn-hover);
+}
+
+.camera-control-danger:hover {
+  background: var(--alert-hover);
+}
+
+.camera-control:hover, .camera-control-danger:hover {
+  transform: translateY(-2.5px);
+  box-shadow: 0 6.5px 14px rgba(0, 0, 0, 0.25);
 }
 
 /* Phone breakpoints */
 @media (max-width: 768px) {
-  .map-link-header{
-    display: none;
+  .geolocate-card{
+    grid-template-columns: auto;
+    grid-template-rows: 200px auto;
   }
 
-  .geolocate-table{
-    grid-template-columns: 1fr auto;
+  .geolocate-cell-cood {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
-  .geolocate-cell{
-    overflow: hidden;
-    text-overflow: unset;
-    white-space: wrap;
-    padding-right: 1rem;
+  .geolocate-meta{
+    flex-direction: column-reverse;
+    gap: 0.25rem;
+    align-items: center;
   }
 
-  .seperator, .geolocate-cell-last{
-    grid-column: 1 / span 2;
+  .geolocate-btns{
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
   }
 
-  .geolocate-cell-last{
-    justify-content: center;
+  .geolocate-cell-btn{
+    grid-area: auto / span 2;
   }
 }

@@ -16,7 +16,7 @@
 
   /* Button mapping (preserved) */
   --btn-light: var(--green-medium);
-  --btn-dark: var(--green-bright);
+  --btn-dark: #48BF84;
   --btn: light-dark(var(--btn-light), var(--btn-dark));
   --btn-hover: light-dark(#246445, #4FD08F);
 
