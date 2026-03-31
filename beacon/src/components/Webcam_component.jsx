@@ -36,7 +36,7 @@ function Webcam_component({ onCapture, onClose }) {
     if (cameraError) {
         return (
             <div className="camera-modal">
-                <p>Camera not available or permission denied.</p>
+                <p className="camera-error">Camera not available or permission denied.</p>
                 <button onClick={onClose} className="camera-control-danger">
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                         cancel

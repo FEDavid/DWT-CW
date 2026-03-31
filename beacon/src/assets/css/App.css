@@ -391,6 +391,13 @@ a:hover{
   box-shadow: 0 6.5px 14px rgba(0, 0, 0, 0.25);
 }
 
+.camera-error{
+  color: #ffffff;
+  font-size: large;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
 /* Phone breakpoints */
 @media (max-width: 768px) {
   .geolocate-card{
