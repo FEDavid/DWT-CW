@@ -48,14 +48,17 @@ function Webcam_component({ onCapture, onClose }) {
 
     return (
         <div className="camera-modal">
+
             {/* If webcam is available, display it */}
-            <Webcam
-                audio={false}
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-                width={720}
-                onUserMediaError={() => setCameraError(true)}
-            />
+            <div className="webcam-container">
+                <Webcam
+                    className="webcam"
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    onUserMediaError={() => setCameraError(true)}
+                />
+            </div>
 
             <div className="camera-controls">
                 <button onClick={captureImage} className="camera-control">
