@@ -1,4 +1,22 @@
 // beacon\src\utils\offline.js
 
-// Performing a simple check, is user offline.
-export const isOffline = () => !navigator.onLine;
+import { useEffect, useState } from "react";
+
+export const useOffline = () => {
+  const [offline, setOffline] = useState(!navigator.onLine);
+
+  useEffect(() => {
+    const goOffline = () => setOffline(true);
+    const goOnline = () => setOffline(false);
+
+    window.addEventListener("offline", goOffline);
+    window.addEventListener("online", goOnline);
+
+    return () => {
+      window.removeEventListener("offline", goOffline);
+      window.removeEventListener("online", goOnline);
+    };
+  }, []);
+
+  return offline;
+};

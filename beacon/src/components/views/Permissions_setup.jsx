@@ -11,12 +11,12 @@ import GeolocateComponent from "../Geolocate_component";
 import ReminderComponent from "../Reminder_component";
 
 // Import utils
-import { isOffline } from "../../utils/offline";
+import { useOffline } from "../../utils/offline";
 
 export default function PermissionsSetup() {
 
   // Call the isOffline function to determine if the app is offline, applied to components which won't function offline
-  const offline = isOffline();
+  const offline = useOffline();
 
   return (
     <div className="app">
