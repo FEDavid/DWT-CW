@@ -1,6 +1,39 @@
 // service-worker.js
-self.addEventListener("install", (event) =>{
-    console.log("Service worker installing..");
+
+// Offline support: Cache essential files for offline use
+const CACHE_NAME = "beacon-cache-v1";
+
+// Array of files that make up the app shell, which will be cached for offline access
+// As Index calls JS that makes up react app, this is also cached to ensure app loads offline, along with manifest and icons for PWA functionality
+const APP_SHELL = [
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/icons/icon-192.png"
+];
+
+self.addEventListener("install", (event) => {
+  console.log("Service worker installing..");
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Caching app shell");
+      return cache.addAll(APP_SHELL);
+    })
+  );
+  console.log("Service worker installed");
+});
+
+// Each request will be checked to see if the files requested exist in cache, if they do they will be returned, else the request will be made as standard
+// Normally if something isn't cached and we wanted it to be, this is where we would cache it, but it's unncessary for this small app
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request);
+    })
+  );
 });
 
 // Handles what happens when the user taps the notification buttn
