@@ -25,25 +25,35 @@ self.addEventListener("install", (event) => {
 });
 
 // Each request will be checked to see if the files requested exist in cache, if they do they will be returned, else the request will be made as standard
-// Normally if something isn't cached and we wanted it to be, this is where we would cache it, but it's unncessary for this small app
+// We then use dynamic caching to add any new files to the cache as they are requested, so that they will be available offline in the future
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
-      return fetch(event.request);
-    })
+
+      // So this is where dynamic caching happens, if it ain't cached - cache italics - then return the response as normal
+        return fetch(event.request).then((networkResponse) => {
+          return caches.open("beacon-cache-v1").then((cache) => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+          // If there's an error, return cached root so app doesn't break
+        }).catch(() => {
+          return caches.match("/");
+        });
+      })
   );
 });
 
 // Handles what happens when the user taps the notification buttn
 self.addEventListener("notificationclick", (event) => {
-    event.notification.close();
-    event.waitUntil(
-        // Opens the app when notification is tapped
-        clients.openWindow("/") 
-    );
+  event.notification.close();
+  event.waitUntil(
+    // Opens the app when notification is tapped
+    clients.openWindow("/")
+  );
 });
 
 // Listens for "Period sync" event to register, then triggers a periodic 30 minute timer
