@@ -7,12 +7,6 @@ import "../assets/css/App.css";
 import { trackingReminder } from "../utils/reminder"
 
 export default function ReminderComponent() {
-
-    // If the app is offline, return null as the reminder component won't work without an internet connection
-    if (!navigator.onLine) {
-        return null;
-    }
-
     return (
         <section className="card">
             <h1 className="card-title">Setup reminders</h1>

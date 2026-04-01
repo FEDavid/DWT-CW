@@ -6,12 +6,6 @@ import "../assets/css/App.css";
 import { sendImmediateNotification } from "../utils/notifications"
 
 function Notification_component() {
-
-    // If the app is offline, return null as the reminder component won't work without an internet connection
-    if (!navigator.onLine) {
-        return null;
-    }
-
     return (
         <section className="card">
             <h1 className="card-title">Notification test</h1>
