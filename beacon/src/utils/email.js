@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser";
 
-const sendLocationEmail = async ({ lat, lng, name }) => {
+export const sendLocationEmail = async ({ lat, lng, name }) => {
   const map_link = `https://maps.google.com/?q=${lat},${lng}`;
   const timestamp = new Date().toLocaleString();
 
