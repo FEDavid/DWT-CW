@@ -11,6 +11,7 @@ import { useState, useRef, useEffect } from "react";
 
 function Webcam_component({ onCapture, onClose }) {
     const [cameraError, setCameraError] = useState(false);
+    const [facingMode, setFacingMode] = useState("user");
 
     const webcamRef = useRef(null);
 
@@ -22,6 +23,13 @@ function Webcam_component({ onCapture, onClose }) {
                 onCapture(imageSrc);
             }
         }
+    };
+
+    // Switch between front and rear cameras (if available), through useState hook
+    const switchCamera = () => {
+        setFacingMode((prev) =>
+            prev === "user" ? "environment" : "user"
+        );
     };
 
     // Disable background scrolling when webcam modal is open
@@ -56,16 +64,25 @@ function Webcam_component({ onCapture, onClose }) {
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
+                    videoConstraints={{ facingMode }}
                     onUserMediaError={() => setCameraError(true)}
                 />
             </div>
 
             <div className="camera-controls">
+                {/* Capture button */}
                 <button onClick={captureImage} className="camera-control">
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                         camera
                     </span>
                 </button>
+                {/* Switch camera button */}
+                <button onClick={switchCamera} className="camera-control">
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                        switch_camera
+                    </span>
+                </button>
+                {/* Close button */}
                 <button onClick={onClose} className="camera-control-danger">
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                         cancel
