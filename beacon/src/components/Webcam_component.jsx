@@ -11,7 +11,7 @@ import { useState, useRef, useEffect } from "react";
 
 function Webcam_component({ onCapture, onClose }) {
     const [cameraError, setCameraError] = useState(false);
-    const [facingMode, setFacingMode] = useState("user");
+    const [facingMode, setFacingMode] = useState("environment");
 
     const webcamRef = useRef(null);
 
