@@ -18,6 +18,7 @@ import { useState } from "react";
 
 // Import utils
 import { db } from "../utils/indexDB";
+import { sendLocationEmail } from "../utils/email";
 
 function Geolocate_component() {
     // Loading GPS data takes a second so adding loader
@@ -49,6 +50,13 @@ function Geolocate_component() {
 
                     // Hide loading state
                     setIsLoading(false);
+
+                    // Send email notification with location data
+                    await sendLocationEmail({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        name: newLocation.title
+                    });
 
                     sendImmediateNotification("Location logged.")
                 },
