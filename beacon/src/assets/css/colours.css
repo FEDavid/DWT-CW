@@ -3,22 +3,24 @@
 
   /* Base Greens */
   --green-dark: #112D1C;
-  --green-darker: #050F0A;
+  --green-darker: #030b06;
+  --green-darkest: #0c2418;
   --green-medium: #30885C;
   --green-bright: #48BF84;
   --green-light: #86D5AD;
-  --green-very-light: #cfe4d9;
+  --green-very-light: #c0e4d1;
 
   /* Original Role Mapping (preserved) */
-  --background: light-dark(var(--green-very-light), var(--green-darker));
-  --container: light-dark(var(--green-light), var(--green-medium));
-  --text: light-dark(var(--green-dark), var(--green-very-light));
+  --background: light-dark(#ebebeb, var(--green-darker));
+  --container: light-dark(#fafafa, var(--green-darkest));
+  --text: light-dark(var(--green-darker), var(--green-very-light));
 
   /* Button mapping (preserved) */
   --btn-light: var(--green-medium);
-  --btn-dark: #48BF84;
+  --btn-dark: #2d8353;
   --btn: light-dark(var(--btn-light), var(--btn-dark));
   --btn-hover: light-dark(#246445, #4FD08F);
+  --modal-bg: light-dark(var(--green-very-light), var(--green-darker));
 
   /* Alert */
   --alert: light-dark(#D94C4C, #E85C5C);

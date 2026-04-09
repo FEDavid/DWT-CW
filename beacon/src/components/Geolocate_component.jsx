@@ -12,6 +12,7 @@ import { sendImmediateNotification } from "../utils/notifications";
 
 // Import components
 import GeolocateRow from "./GeolocateRow_component";
+import CardTitle from "./ui/CardTitle_component";
 
 // Import hooks
 import { useState } from "react";
@@ -55,7 +56,8 @@ function Geolocate_component() {
                     await sendLocationEmail({
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
-                        name: newLocation.title
+                        name: newLocation.title,
+                        to: localStorage.getItem("userEmail")
                     });
 
                     sendImmediateNotification("Location logged.")
@@ -80,8 +82,8 @@ function Geolocate_component() {
 
     return (
         <section className="card">
-            <h1 className="card-title">Geolocation</h1>
-            <p className="body-text">Allows user to store current location, and also open that location on Google maps using a URL query with the latitude and longitude. Also offers option to remove all stored locations!</p>
+            <CardTitle title="Log location" icon="add_location_alt" />
+            {/* <p className="body-text">Allows user to store current location, and also open that location on Google maps using a URL query with the latitude and longitude. Also offers option to remove all stored locations!</p> */}
             <div className="seperator"></div>
             <div className="button-row">
                 <button className="primary-btn" onClick={handleGetLocation} disabled={isLoading}>
@@ -96,6 +98,7 @@ function Geolocate_component() {
 
             {/* Table showing all geolocation data */}
             <div className="geolocate-results">
+                {locations.length === 0 && <p className="body-text">No locations logged yet.</p>}
                 {/* Map over locations array to create rows */}
                 {locations.map((location) => (
                     <GeolocateRow
